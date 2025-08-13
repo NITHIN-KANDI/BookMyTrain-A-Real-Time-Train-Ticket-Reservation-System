@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>redRail: Train Ticket Booking</title>
+  <!-- Include CSS files -->
+ <style>/* Header Styles */
+   /* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #ff4d4f; /* redRail theme color */
+  color: white;
+  width: 100%; /* Ensure full width */
+  position: relative;
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-welcome {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 14px;
+}
+
+.user-welcome span {
+  margin-right: 10px;
+}
+
+.logout-btn,
+.login-btn {
+  padding: 8px 15px;
+  background-color: #ffffff;
+  border: none;
+  color: #ff4d4f;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover,
+.login-btn:hover {
+  background-color: #f8d7da;
+}
+
+/* Hero Section */
+.hero-section {
+  background: url("https://th.bing.com/th/id/R.9a8e8cf7758dd7e03f11d8c33c9d7467?rik=mSfYvNs8BoKgJg&riu=http%3a%2f%2fwonderfulengineering.com%2fwp-content%2fuploads%2f2014%2f05%2ftrain-pictures-24.jpg&ehk=EvZdE3MMuYf8sQNgYI6Foc%2fcPAL0g7OCdt27ru%2fbDng%3d&risl=&pid=ImgRaw&r=0") 
+    no-repeat center center;
+  background-size: cover;
+  text-align: center;
+  padding: 80px 20px;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Overlay for better contrast */
+  z-index: -1;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+/* Features Section */
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px auto;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature {
+  text-align: center;
+  max-width: 250px;
+}
+
+.feature-icon {
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.feature-description {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Train Search Section */
+.train-search-container {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 80%;
+  max-width: 1000px;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-buttons button {
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  transition: 0.3s;
+}
+
+.tab-buttons button.active-tab {
+  background: #ff4d4f;
+  color: white;
+  border-color: #ff4d4f;
+}
+
+.tab-buttons button:hover {
+  background: #f8d7da;
+  color: #ff4d4f;
+}
+
+.search-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: 15px;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  flex: 1;
+  max-width: 250px;
+  position: relative;
+}
+
+.search-field input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  flex: 1;
+}
+
+.search-field .icon {
+  font-size: 18px;
+  color: #888;
+}
+
+.search-button {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-button:hover {
+  background: #d9363e;
+}
+
+/* Footer Section */
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-link {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .features-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .feature {
+    max-width: 100%;
+  }
+
+  .search-box {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .search-field {
+    max-width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+    padding: 12px 0;
+  }
+}
+
+    </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-left">
+      <img src="https://th.bing.com/th/id/R.8fe9c522e59aef0d241d8c890547aac0?rik=s66evkqT2lA7DA&riu=http%3a%2f%2fwww.pngmart.com%2ffiles%2f6%2fTrain-Transparent-Background.png&ehk=PvP8QHEgWEgoD%2bvYIDtfv7envZm%2fxHOCx%2bbqaNHh9sg%3d&risl=&pid=ImgRaw&r=0" alt="logo" class="logo">
+      <span class="brand">BookMyTrain</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Help</a>
+      <div class="user-info">
+        <span class="user-welcome">Welcome, <span>Guest</span></span>
+        <button class="login-btn">Login</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1 class="hero-title">redRail: Train Ticket Booking</h1>
+    <p class="hero-subtitle">Authorized by IRCTC</p>
+  </section>
+
+ 
+
+  <!-- Train Search Section -->
+  <section class="train-search-container">
+    <div class="tab-buttons">
+      <button class="active-tab">Book Train Tickets</button>
+      <button>Check PNR Status</button>
+      <button>Live Train Status</button>
+    </div>
+    <div class="search-box">
+      <div class="search-field">
+        <span class="icon">🚉</span>
+        <input type="text" id="from-station" placeholder="From Station" autocomplete="off">
+        <ul id="from-station-suggestions" class="suggestions-list"></ul>
+      </div>
+      <div class="search-field">
+        <span class="icon">🚉</span>
+        <input type="text" id="to-station" placeholder="To Station" autocomplete="off">
+        <ul id="to-station-suggestions" class="suggestions-list"></ul>
+      </div>
+      <div class="search-field">
+        <span class="icon">📅</span>
+        <input type="date" id="travel-date" placeholder="Select Date">
+      </div>
+      <button class="search-button">Search Trains</button>
+    </div>
+  </section>
+ <!-- Features Section -->
+ <section class="features-section">
+    <div class="feature">
+      <img src="https://cdn.freelogovectors.net/wp-content/uploads/2021/12/irctc-logo-freelogovectors.net_.png" alt="Feature 1" class="feature-icon">
+      <h3 class="feature-title">Book Train Tickets</h3>
+      <p class="feature-description">Easily book train tickets for your journey.</p>
+    </div>
+    <div class="feature">
+      <img src="https://thumbs.dreamstime.com/b/full-refund-grunge-vintage-stamp-isolated-white-background-full-refund-sign-full-refund-stamp-122362519.jpg" alt="Feature 2" class="feature-icon">
+      <h3 class="feature-title">Check PNR Status</h3>
+      <p class="feature-description">Stay updated with your ticket confirmation.</p>
+    </div>
+    <div class="feature">
+      <img src="https://www.freeiconspng.com/uploads/customer-service-icon-png-9.png" alt="Feature 3" class="feature-icon">
+      <h3 class="feature-title">Live Train Status</h3>
+      <p class="feature-description">Track your train’s location in real-time.</p>
+    </div>
+  </section>
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2024 redRail. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Privacy Policy</a>
+      <a href="#" class="footer-link">Terms of Service</a>
+      <a href="#" class="footer-link">Contact Us</a>
+    </div>
+  </footer>
+
+  <!-- Include JavaScript for dynamic station suggestions -->
+  <script > document.addEventListener("DOMContentLoaded", () => {
+    const fetchSuggestions = (inputId, suggestionsId) => {
+      const input = document.getElementById(inputId);
+      const suggestions = document.getElementById(suggestionsId);
+  
+      input.addEventListener("input", () => {
+        const query = input.value.trim();
+  
+        if (query.length < 2) {
+          suggestions.innerHTML = "";
+          return;
+        }
+  
+        fetch(`/get_stations?query=${query}`)
+          .then((response) => response.json())
+          .then((data) => {
+            suggestions.innerHTML = "";
+            data.forEach((station) => {
+              const li = document.createElement("li");
+              li.textContent = station;
+              li.addEventListener("click", () => {
+                input.value = station;
+                suggestions.innerHTML = "";
+              });
+              suggestions.appendChild(li);
+            });
+          })
+          .catch((error) => console.error("Error fetching station suggestions:", error));
+      });
+    };
+  
+    fetchSuggestions("from-station", "from-station-suggestions");
+    fetchSuggestions("to-station", "to-station-suggestions");
+  });
+  </script>
+</body>
+</html>

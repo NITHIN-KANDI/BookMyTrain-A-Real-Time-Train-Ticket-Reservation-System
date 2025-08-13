@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>/* Sign Up Modal Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://img.freepik.com/premium-photo/red-background-with-picture-train-line-middle_1042628-73542.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            backdrop-filter: blur(5px); /* Blur effect */
+            z-index: -1;
+        }
+        
+        .signup-modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .signup-modal-content {
+            background: rgba(0, 0, 0, 0.8); /* Dominant black background with transparency */
+            padding: 30px;
+            border-radius: 10px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9); /* More pronounced shadow */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border effect */
+        }
+        
+        .signup-title {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff; /* White text for contrast */
+        }
+        
+        .signup-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle input border */
+            border-radius: 5px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2); /* Transparent input background */
+            color: #fff; /* White text */
+        }
+        
+        .signup-input::placeholder {
+            color: rgba(255, 255, 255, 0.7); /* Subtle placeholder text */
+        }
+        
+        .signup-submit-btn {
+            background: #ff4d4f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: 0.3s ease;
+        }
+        
+        .signup-submit-btn:hover {
+            background: #d9363e;
+        }
+        
+        .already-account-link {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7); /* Subtle white text */
+            text-decoration: none;
+        }
+        
+        .already-account-link:hover {
+            color: #ff4d4f;
+            text-decoration: underline;
+        }
+        </style>
+</head>
+<body>
+    <div class="signup-modal">
+        <div class="signup-modal-content">
+            <h2 class="signup-title">Create Account</h2>
+            <form id="signup-form" action="/signup" method="post">
+                <input name="name" type="text" id="name" placeholder="Name" class="signup-input">
+                <input name="email" type="email" id="email" placeholder="Email" class="signup-input">
+                <input name="phone" type="tel" id="phone" placeholder="Phone No." class="signup-input">
+                <input name="password" type="password" id="password" placeholder="Password" class="signup-input">
+                <input name="confirm-password" type="password" id="confirm-password" placeholder="Confirm Password" class="signup-input">
+                <button type="button" id="signup-button" class="signup-submit-btn">Sign Up</button>
+                <a href="/login" class="already-account-link">Already have an account? Sign In</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Validation function
+        document.getElementById("signup-button").addEventListener("click", function() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirm-password").value.trim();
+
+            // Regex for email and phone validation
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const phoneRegex = /^[0-9]{10}$/;
+
+            if (name === "") {
+                alert("Please enter your name.");
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please check.");
+                return;
+            }
+
+            
+        });
+    </script>
+</body>
+</html>

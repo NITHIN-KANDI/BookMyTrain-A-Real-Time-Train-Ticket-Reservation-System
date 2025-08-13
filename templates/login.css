@@ -1,0 +1,111 @@
+
+/* Login Modal Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://img.freepik.com/premium-photo/red-background-with-picture-train-line-middle_1042628-73542.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    backdrop-filter: blur(5px); /* Blur effect */
+    z-index: -1;
+}
+
+.login-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.login-modal-content {
+    background: rgba(0, 0, 0, 0.8); /* Dominant black background with transparency */
+    padding: 30px;
+    border-radius: 10px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9); /* More pronounced shadow */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border effect */
+}
+
+.login-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff; /* White text for contrast */
+}
+
+.login-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle input border */
+    border-radius: 5px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.2); /* Transparent input background */
+    color: #fff; /* White text */
+}
+
+.login-input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Subtle placeholder text */
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.login-submit-btn {
+    background: #ff4d4f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.login-submit-btn:hover {
+    background: #d9363e;
+}
+
+.create-account-link {
+    font-size: 14px;
+    color: #ff4d4f;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.create-account-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7); /* Subtle white text */
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    color: #ff4d4f;
+    text-decoration: underline;
+}
